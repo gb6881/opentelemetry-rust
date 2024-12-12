@@ -18,10 +18,10 @@ pub(crate) use exponential_histogram::{EXPO_MAX_SCALE, EXPO_MIN_SCALE};
 use once_cell::sync::Lazy;
 use opentelemetry::{otel_warn, KeyValue};
 
-#[cfg(any(target_arch = "mips", target_arch = "powerpc"))]
+#[cfg(any(target_arch = "mips", target_arch = "powerpc", target_arch = "xtensa"))]
 use portable_atomic::{AtomicBool, AtomicI64, AtomicU64, AtomicUsize};
 
-#[cfg(not(any(target_arch = "mips", target_arch = "powerpc")))]
+#[cfg(not(any(target_arch = "mips", target_arch = "powerpc", target_arch = "xtensa")))]
 use std::sync::atomic::{AtomicBool, AtomicI64, AtomicU64, AtomicUsize};
 
 use crate::metrics::AttributeSet;
