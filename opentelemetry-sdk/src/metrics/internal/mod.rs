@@ -9,7 +9,13 @@ use core::fmt;
 use std::collections::{HashMap, HashSet};
 use std::mem::swap;
 use std::ops::{Add, AddAssign, DerefMut, Sub};
+#[cfg(not(any(target_arch = "mips", target_arch = "powerpc", target_arch = "xtensa")))]
 use std::sync::atomic::{AtomicBool, AtomicI64, AtomicU64, AtomicUsize, Ordering};
+#[cfg(any(target_arch = "mips", target_arch = "powerpc", target_arch = "xtensa"))]
+use portable_atomic::{AtomicBool, AtomicI64, AtomicU64, AtomicUsize, Ordering};
+
+#[cfg(not(any(target_arch = "mips", target_arch = "powerpc", target_arch = "xtensa")))]
+use std::sync::atomic::{AtomicBool, AtomicI64, AtomicU64, AtomicUsize};
 use std::sync::{Arc, OnceLock, RwLock};
 
 use aggregate::{is_under_cardinality_limit, STREAM_CARDINALITY_LIMIT};
