@@ -284,7 +284,7 @@ impl prometheus::core::Collector for Collector {
         };
 
         let mut metrics = ResourceMetrics {
-            resource: Resource::empty(),
+            resource: Resource::builder_empty().build(),
             scope_metrics: vec![],
         };
         if let Err(err) = self.reader.collect(&mut metrics) {
